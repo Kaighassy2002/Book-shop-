@@ -1,0 +1,17 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    /* overflow-x: hidden; */
+
+}
+.header{
+    margin-top: -50px;
+    height: 90vh;
+    background-size: cover;
+    background-image: url(https://cdn.dribbble.com/users/1508519/screenshots/5491835/img_0100.gif
+
+
+    );
+   
+}
