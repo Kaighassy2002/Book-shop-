@@ -42,7 +42,7 @@ function Add() {
       const result = await uploadBooks(addbook)
       console.log(result);
       if (result.status>=200 && result.status<300) {
-        alert(`Boook '${result.data.caption}'uploaded successfully!!!`)
+        alert(`Boook '${result.data.bookName}'uploaded successfully!!!`)
         
         handleClose()
       }else{
