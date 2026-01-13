@@ -1,21 +1,46 @@
-import React, { useState } from 'react'
+import React, { useState, useCallback } from 'react'
+import Add from '../components/Add'
+import ViewCard from '../components/ViewCard'
+import Statistics from '../components/Statistics'
+import { Container } from 'react-bootstrap'
 
-import Add from '../compontents/Add'
-import ViewCard from '../compontents/ViewCard'
+function Home({ searchTerm = '' }) {
+  const [refreshTrigger, setRefreshTrigger] = useState(0);
+  const [allBooks, setAllBooks] = useState([]);
 
-function Home() {
- 
+  const handleBookAdded = useCallback(() => {
+    setRefreshTrigger(prev => prev + 1);
+  }, []);
+
+  const handleBooksLoaded = useCallback((books) => {
+    setAllBooks(books);
+  }, []);
+
   return (
     <>
-      <div >
-        <div className="mb-5">
-            <img width={'100%'} height={'500px'} src="https://www.housedigest.com/img/gallery/how-to-make-custom-wallpaper-using-old-book-pages/intro-1660552487.jpg" alt="" />
-        </div>    
+      <div className="hero-section mt-5 mb-5">
+        <Container>
+          <div className="text-center py-5">
+            <h1 className="display-5 fw-bold mb-3">
+              <i className="fa-solid fa-book-open me-2 text-primary"></i>
+              Explore Our Book Collection
+            </h1>
+            <p className="lead text-muted">
+              Discover amazing books and manage your personal library
+            </p>
+          </div>
+        </Container>
       </div>
-     
-      <Add/>
       
-      <ViewCard/>
+      <Add onBookAdded={handleBookAdded} />
+      
+      <Statistics books={allBooks} />
+      
+      <ViewCard 
+        refreshTrigger={refreshTrigger} 
+        searchTerm={searchTerm}
+        onBooksLoaded={handleBooksLoaded}
+      />
     </>
   )
 }
